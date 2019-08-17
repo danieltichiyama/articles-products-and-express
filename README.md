@@ -6,7 +6,7 @@ Let the **tests drive your development** or write your tests after. The choice i
 
 - [mocha](https://mochajs.org/)
 - [chai](https://chaijs.com/)
-- [supertest](https://github.com/visionmedia/supertest)
+- [supertest](https://github.com/visionmedinpm install supertest --save-deva/supertest)
   - [supertest is built upon `superagent` so these docs will be helpful as well](https://github.com/visionmedia/superagent)
 
 ## Goal
