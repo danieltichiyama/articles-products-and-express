@@ -1,14 +1,20 @@
-let counter = 0;
+let counter = 3;
 
-let products = [];
+let products = [
+  { name: "Test", price: 500.0, inventory: 100, id: 0 },
+  { name: "Big Red Button", price: 200.0, inventory: 1, id: 1 },
+  { name: "Rubber ducky", price: 20.0, inventory: 1000, id: 2 }
+];
 
 module.exports = {
   getCount: function() {
     return counter;
   },
+
   getProducts: function() {
     return products;
   },
+
   addProduct: function(data) {
     for (let i = 0; i < products.length; i++) {
       if (products[i].name === data.name && products[i].price === data.price) {

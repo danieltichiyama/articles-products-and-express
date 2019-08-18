@@ -9,7 +9,7 @@ const encoding = { encoding: "utf8" };
 let date = new Date();
 
 router.get(path, (req, res) => {
-  res.send(products.getProducts());
+  res.render("index", { products: products.getProducts() });
 });
 
 router.post(path, (req, res) => {

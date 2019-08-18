@@ -11,6 +11,8 @@ const PORT = 8080;
 
 app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.engine(".hbs", exphbs({ extname: ".hbs" }));
+app.set("view engine", ".hbs");
 
 app.use(productRoutes); //uses products.js router
 
