@@ -1,33 +1,52 @@
 const express = require("express");
 const router = express.Router();
-const bodyParser = require("body-parser");
+const products = require("../db/products.js");
+const fs = require("fs");
 
 const path = "/products";
+const encoding = { encoding: "utf8" };
+
+let date = new Date();
 
 router.get(path, (req, res) => {
-  console.log("req.method", req.method);
-  res.send("products_getOkay");
+  res.send(products.getProducts());
 });
 
 router.post(path, (req, res) => {
-  console.log("req.method", req.method);
-  console.log("req.body", req.body);
-
-  res.send("products_postOkay");
+  let isSuccessful = products.addProduct(req.body);
+  if (!isSuccessful) {
+    throwError(400, "Product already exists in database.", res, req);
+  } else {
+    res.sendStatus(200);
+  }
 });
 
 router.put(`${path}/:id`, (req, res) => {
-  console.log("req.method", req.method);
-  console.log("req.params", req.params);
-  console.log("req.body", req.body);
-  res.send("products_putOkay");
+  let isSuccessful = products.changeProduct(parseInt(req.params.id), req.body);
+  if (!isSuccessful) {
+    throwError(400, "Product ID not found in database.", res, req);
+  } else {
+    res.send(products.getProduct(req.params.id));
+  }
 });
 
 router.delete(`${path}/:id`, (req, res) => {
-  console.log("req.method", req.method);
-  console.log("req.params", req.params);
-  console.log("req.body", req.body);
-  res.send("products_deleteOkay");
+  let isSuccessful = products.deleteProduct(parseInt(req.params.id));
+  if (!isSuccessful) {
+    throwError(500, `Cannot delete product at ID ${req.param.id}.`, res, req);
+  } else {
+    res.sendStatus(200);
+  }
 });
+
+let throwError = function(code, message, res, req) {
+  return res.send({
+    product: req.body.name,
+    price: parseFloat(req.body.price),
+    inventory: parseFloat(req.body.inventory),
+    "Error-Code": code,
+    Message: message
+  });
+};
 
 module.exports = router;
