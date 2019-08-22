@@ -28,7 +28,7 @@ module.exports = {
     return true;
   },
 
-  changeProduct: function(idx, obj) {
+  changeItem: function(idx, obj) {
     for (i = 0; i < products.length; i++) {
       if (products[i].id === idx) {
         for (key in obj) {

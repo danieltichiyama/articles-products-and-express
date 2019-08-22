@@ -2,14 +2,27 @@ const express = require("express");
 const router = express.Router();
 const products = require("../db/products.js");
 const fs = require("fs");
+const methodOverride = require("method-override");
 
 const path = "/products";
 const encoding = { encoding: "utf8" };
 
 let date = new Date();
-
-router.get(path, (req, res) => {
+//how can I assign the path to a given variable?
+router.get("/products", (req, res) => {
   res.render("index", { products: products.getProducts() });
+});
+
+router.get("/products/:id", (req, res) => {
+  res.render("product", { product: products.getProduct(req.params.id) });
+}); //can it be made to be searched by product name and not id#?
+
+router.get("/products/:id/edit", (req, res) => {
+  res.render("edit", { product: products.getProduct(req.params.id) });
+}); //should automatically fill in current information
+
+router.get("/products/new", (req, res) => {
+  res.render("new"); //should have a list of current items that will narrow down if the user types in something that is similar to a product that already exists
 });
 
 router.post(path, (req, res) => {
@@ -22,7 +35,7 @@ router.post(path, (req, res) => {
 });
 
 router.put(`${path}/:id`, (req, res) => {
-  let isSuccessful = products.changeProduct(parseInt(req.params.id), req.body);
+  let isSuccessful = products.changeItem(parseInt(req.params.id), req.body);
   if (!isSuccessful) {
     throwError(400, "Product ID not found in database.", res, req);
   } else {
