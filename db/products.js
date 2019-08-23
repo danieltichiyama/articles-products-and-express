@@ -1,10 +1,6 @@
-let counter = 3;
+let counter = 0;
 
-let products = [
-  { name: "Test", price: 500.0, inventory: 100, id: 0 },
-  { name: "Big Red Button", price: 200.0, inventory: 1, id: 1 },
-  { name: "Rubber ducky", price: 20.0, inventory: 1000, id: 2 }
-];
+let products = [];
 
 module.exports = {
   getCount: function() {
@@ -29,7 +25,6 @@ module.exports = {
   },
 
   changeItem: function(idx, obj) {
-    console.log(obj);
     if (typeof parseFloat(obj.price) !== "number") {
       return false;
     }
@@ -38,7 +33,7 @@ module.exports = {
     }
 
     for (i = 0; i < products.length; i++) {
-      if (products[i].id === idx) {
+      if (products[i].id === parseFloat(idx)) {
         for (key in obj) {
           products[i][key] = obj[key];
         }
@@ -48,9 +43,10 @@ module.exports = {
     return false;
   },
 
-  getProduct: function(num) {
+  getProduct: function(numStr) {
     for (i = 0; i < products.length; i++) {
-      if (products[i].id === parseInt(num)) {
+      if (products[i].id === parseInt(numStr)) {
+        console.log("getProduct>product[i]", products[i]);
         return products[i];
       }
     }
