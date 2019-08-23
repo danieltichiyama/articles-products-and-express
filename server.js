@@ -4,12 +4,16 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
 const app = express();
+const methodOverride = require("method-override");
 
 const productRoutes = require("./routes/products");
 
 const PORT = 8080;
 
 app.use(express.static("./public"));
+
+app.use(methodOverride("_method"));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.engine(".hbs", exphbs({ extname: ".hbs" }));
 app.set("view engine", ".hbs");

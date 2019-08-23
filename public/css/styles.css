@@ -12,14 +12,54 @@ body {
   padding: 0 0 10px 20px;
   justify-content: flex-end;
   align-items: left;
-  border: 5px solid rgba(0, 0, 0, 0.5); }
+  border: 5px solid rgba(0, 0, 0, 0.5);
+  color: black; }
+  .productLi a {
+    color: inherit;
+    text-decoration: none; }
   .productLi .productImg {
     width: 280px;
-    height: 110px;
+    height: 200px;
     color: rgba(0, 0, 0, 0.2);
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    margin-top: 10px; }
+  .productLi span {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 5px 10px 5px; }
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  width: 25%; }
+  .editForm label {
+    margin: 5px; }
+  .editForm input {
+    margin: 5px;
+    height: 30px;
+    font-size: 12px;
+    padding-left: 5px; }
+  .editForm span {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; }
+
+button {
+  margin: 10px 5px 10px 5px;
+  height: 45px;
+  width: 115px;
+  background-color: green;
+  border: 3px solid darkgreen;
+  border-radius: 2px;
+  color: white;
+  font-size: 12px; }
+  button:active {
+    background-color: darkgreen;
+    border: 3px solid darkgreen; }
+  button:focus {
+    outline: 0; }

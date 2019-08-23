@@ -29,6 +29,14 @@ module.exports = {
   },
 
   changeItem: function(idx, obj) {
+    console.log(obj);
+    if (typeof parseFloat(obj.price) !== "number") {
+      return false;
+    }
+    if (typeof parseFloat(obj.inventory) !== "number") {
+      return false;
+    }
+
     for (i = 0; i < products.length; i++) {
       if (products[i].id === idx) {
         for (key in obj) {
@@ -40,8 +48,12 @@ module.exports = {
     return false;
   },
 
-  getProduct: function(idx) {
-    return products[idx];
+  getProduct: function(num) {
+    for (i = 0; i < products.length; i++) {
+      if (products[i].id === parseInt(num)) {
+        return products[i];
+      }
+    }
   },
 
   deleteProduct: function(idx) {

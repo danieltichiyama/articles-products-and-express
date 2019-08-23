@@ -2,3 +2,14 @@
 <p>Price: {{product.price}}</p>
 <p>Inventory: {{product.inventory}}</p>
 <p>ID: {{product.id}}</p>
+<span>
+    <form action="/products/{{product.id}}/edit">
+        <button type="submit">Edit</button>
+    </form>
+    <form action="/products/{{product.id}}?_method=DELETE">
+        <button type="submit">Delete</button>
+    </form>
+    <form action="/products">
+        <button type="submit" formmethod="GET">Product List</button>
+    </form>
+</span>
