@@ -47,7 +47,7 @@ router.put(`/products/:id`, (req, res) => {
       "router.put>products.getProduct(req.params.id)",
       products.getProduct(req.params.id)
     );
-    res.redirect(`/products/${parseInt(req.params.id)}`);
+    res.redirect(`/products/${req.params.id}`);
   }
 });
 
