@@ -1,18 +1,19 @@
 <div id="messageContent">
+    <h2>Something went wrong T^T ...</h2>
     <h3>ERROR: {{error.error}}</h3>
 
-    {{#if errorPOST}}
+    {{#if errorNew}}
     <p>{{error.product}} could not be added to the database.</p>
     {{/if}}
 
-    {{#if errorPUT}}
-    <p>{{error.product}} could not be changed.</p>
+    {{#if errorEdit}}
+    <p>{{error.product}} could not be edited.</p>
     {{/if}}
 
-    {{#if errorDELETE}}
-    <p>{{error.product}} could not be deleted</p>
+    {{#if errorDelete}}
+    <p>{{error.product}} could not be deleted.</p>
     {{/if}}
 
     <p>{{error.date}}</p>
-    <p>Please check that your data is formatted correctly.</p>
+    <p>Please check that your data is formatted correctly and try again.</p>
 </div>

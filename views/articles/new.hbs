@@ -1,0 +1,23 @@
+<h1>New Article</h1>
+<p>Use this form to create a new article.</p>
+
+<form id="newArticleForm" class="editForm" action="/articles" method="POST">
+
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title" value="{{article.title}}">
+
+    <label for="author">Author: </label>
+    <input type="text" name="author" id="author" value="{{article.author}}">
+
+    <label for="body">Content:</label>
+    <textarea form="newArticleForm" name="body" required>Where's the meat?</textarea>
+
+    <span>
+        <button type="submit">Submit</button>
+        <button type="submit" formaction="/articles" formmethod="GET">Cancel</button>
+    </span>
+</form>
+
+{{#if error}}
+{{> errors}}
+{{/if}}

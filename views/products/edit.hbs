@@ -16,12 +16,9 @@
         <button type="submit" formaction="/products/{{product.id}}?_method=DELETE">Delete</button>
         <button type="submit" formaction="/products" formmethod="GET">Cancel</button>
     </span>
-    <form action="/products" method="GET">
-    </form>
 
 </form>
 
 {{#if error}}
 {{> errors}}
-{{else}}
 {{/if}}
