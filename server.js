@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.engine(".hbs", exphbs({ extname: ".hbs" }));
 app.set("view engine", ".hbs");
 
-app.use(productRoutes); //uses products.js router
+app.use("/", productRoutes); //uses products.js router
 
 app.listen(PORT, () => {
   console.log(`Server started on PORT:${PORT}`);

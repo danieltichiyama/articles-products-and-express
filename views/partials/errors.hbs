@@ -1,0 +1,18 @@
+<div id="messageContent">
+    <h3>ERROR: {{error.error}}</h3>
+
+    {{#if errorPOST}}
+    <p>{{error.product}} could not be added to the database.</p>
+    {{/if}}
+
+    {{#if errorPUT}}
+    <p>{{error.product}} could not be changed.</p>
+    {{/if}}
+
+    {{#if errorDELETE}}
+    <p>{{error.product}} could not be deleted</p>
+    {{/if}}
+
+    <p>{{error.date}}</p>
+    <p>Please check that your data is formatted correctly.</p>
+</div>

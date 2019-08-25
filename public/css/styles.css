@@ -2,36 +2,48 @@ body {
   background: orange; }
 
 .productLi {
-  display: flex;
-  flex-direction: column;
   list-style: none;
-  height: 21 0px;
-  width: 300px;
+  height: 75px;
+  width: 1000px;
   background: white;
-  margin: 10px;
-  padding: 0 0 10px 20px;
-  justify-content: flex-end;
-  align-items: left;
-  border: 5px solid rgba(0, 0, 0, 0.5);
+  padding: 1px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   color: black; }
   .productLi a {
     color: inherit;
-    text-decoration: none; }
-  .productLi .productImg {
-    width: 280px;
-    height: 200px;
-    color: rgba(0, 0, 0, 0.2);
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    margin-top: 10px; }
-  .productLi span {
+    text-decoration: none;
     display: flex;
     flex-direction: row;
-    margin: 10px 5px 10px 5px; }
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    padding-left: 5px; }
+    .productLi a .productImg {
+      width: 100px;
+      height: 90%;
+      color: rgba(0, 0, 0, 0.2);
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; }
+    .productLi a ul {
+      list-style: none; }
+    .productLi a span {
+      display: flex;
+      flex-direction: row;
+      margin: 10px 5px 10px 5px;
+      height: 100%;
+      width: auto;
+      align-content: center;
+      justify-content: flex-end;
+      margin-right: 0; }
+      .productLi a span button {
+        height: 95%;
+        width: 50px;
+        margin: 1px;
+        padding: 0;
+        align-content: center; }
 
 .editForm {
   display: flex;

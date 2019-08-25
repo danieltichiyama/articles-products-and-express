@@ -5,19 +5,20 @@
 
 <ul id="productList">
     {{#each products}}
-    <li class="productLi"><a href="/products/{{id}}">
+    <li class="productLi">
+        <a href="/products/{{id}}">
             <div class="productImg">productImgDiv</div>
             <ul>
                 <li>Product Name: {{name}}</li>
                 <li>Price: {{price}}</li>
                 <li>Stock: {{inventory}}</li>
-                <li>ID: {{id}}</li>
             </ul>
+            <span id="id">ID: {{id}}</span>
             <span>
                 <form action="/products/{{id}}/edit">
                     <button type="submit">Edit</button>
                 </form>
-                <form action="/products/{{id}}?_method=DELETE">
+                <form action="/products/{{id}}?_method=DELETE" method="POST">
                     <button type="submit">Delete</button>
                 </form>
             </span>
@@ -25,3 +26,7 @@
     </li>
     {{/each}}
 </ul>
+
+{{#if success}}
+{{>success}}
+{{/if}}

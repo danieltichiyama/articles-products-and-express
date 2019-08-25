@@ -15,3 +15,8 @@
         <button type="submit" formaction="/products" formmethod="GET">Cancel</button>
     </span>
 </form>
+
+{{#if error}}
+{{> errors}}
+{{else}}
+{{/if}}
