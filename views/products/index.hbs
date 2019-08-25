@@ -1,31 +1,36 @@
-<h1>Products</h1>
+<h1>Product List</h1>
 <form>
     <button type="submit" formaction="/products/new" formmethod="GET">Create</button>
 </form>
 
-<ul id="productList">
-    {{#each products}}
-    <li class="productLi">
-        <a href="/products/{{id}}">
-            <div class="productImg">productImgDiv</div>
-            <ul>
-                <li>Product Name: {{name}}</li>
-                <li>Price: {{price}}</li>
-                <li>Stock: {{inventory}}</li>
-            </ul>
-            <span id="id">ID: {{id}}</span>
-            <span>
-                <form action="/products/{{id}}/edit">
-                    <button type="submit">Edit</button>
-                </form>
-                <form action="/products/{{id}}?_method=DELETE" method="POST">
-                    <button type="submit">Delete</button>
-                </form>
-            </span>
-        </a>
-    </li>
-    {{/each}}
-</ul>
+<div id="contents">
+
+    <ul id="productList">
+        {{#each products}}
+        <li class="productLi">
+            <a href="/products/{{id}}">
+                <div class="placeholder"></div>
+                <ul>
+                    <li>{{name}}</li>
+                    <li>Price: {{price}}</li>
+                    <li>Stock: {{inventory}}</li>
+                </ul>
+                <div>
+                    <div id="id">ID: {{id}}</div>
+
+                    <form action="/products/{{id}}/edit">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form action="/products/{{id}}?_method=DELETE" method="POST">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+
+            </a>
+        </li>
+        {{/each}}
+    </ul>
+</div>
 
 {{#if success}}
 {{>success}}

@@ -1,13 +1,27 @@
-body {
-  background: orange; }
+#contents {
+  background: #575757;
+  height: 90vh;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 0 0 0;
+  box-shadow: 1px 1px 10px 5px gray;
+  border-radius: 5px; }
+  #contents #productList {
+    padding-inline-start: 0;
+    margin: 0;
+    width: 97%; }
 
 .productLi {
   list-style: none;
   height: 75px;
-  width: 1000px;
+  width: 100%;
   background: white;
   padding: 1px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  margin-bottom: 5px;
+  border-radius: 5px;
   color: black; }
   .productLi a {
     color: inherit;
@@ -15,35 +29,45 @@ body {
     display: flex;
     flex-direction: row;
     height: 100%;
-    width: 100%;
+    width: 99%;
     align-items: center;
     padding-left: 5px; }
-    .productLi a .productImg {
-      width: 100px;
+    .productLi a .placeholder {
       height: 90%;
-      color: rgba(0, 0, 0, 0.2);
-      background-color: rgba(0, 0, 0, 0.5);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center; }
+      width: 150px;
+      background: purple; }
     .productLi a ul {
-      list-style: none; }
-    .productLi a span {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 0 10px;
+      width: 100%; }
+    .productLi a div {
+      margin-right: auto;
+      height: 100%;
+      width: 40%;
       display: flex;
       flex-direction: row;
-      margin: 10px 5px 10px 5px;
-      height: 100%;
-      width: auto;
-      align-content: center;
       justify-content: flex-end;
-      margin-right: 0; }
-      .productLi a span button {
-        height: 95%;
-        width: 50px;
-        margin: 1px;
-        padding: 0;
-        align-content: center; }
+      align-content: center; }
+      .productLi a div #id {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: auto;
+        align-items: center;
+        margin-right: 10px; }
+      .productLi a div form {
+        height: 100%;
+        width: 35%;
+        align-items: center;
+        display: inherit;
+        justify-content: center; }
+        .productLi a div form button {
+          height: 65%;
+          width: 50px;
+          margin: 1px;
+          padding: 0;
+          align-content: center; }
 
 .editForm {
   display: flex;
