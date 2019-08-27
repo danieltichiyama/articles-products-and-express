@@ -64,10 +64,8 @@ router.post("/articles", (req, res) => {
 });
 
 router.put("/articles/:title", (req, res) => {
-  console.log(req.body);
   let isSuccessful = articlesDB.editArticle(req.params.title, req.body);
   if (!isSuccessful) {
-    console.log("Something went wrong with PUT.");
     globalError = throwError(400, "Article not found.", req);
     errorPUT = true;
     res.redirect(`/articles/${req.params.title}/edit`);
