@@ -130,3 +130,37 @@ button {
     outline: 0;
   }
 }
+
+//new css
+
+#menuContainer {
+  height: 100vh;
+  width: 200px;
+  background: #08345b;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+
+  #menuLogoImg {
+    height: 200px;
+    width: 100%;
+    border-bottom: #21496c 1px solid;
+  }
+
+  #menuList {
+    list-style: none;
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
+
+    .menuItem {
+      height: 50px;
+      width: 100%;
+      border-bottom: #21496c 1px solid;
+      line-height: 50px;
+
+      span {
+        padding: 25px;
+      }
+    }
+  }
+}

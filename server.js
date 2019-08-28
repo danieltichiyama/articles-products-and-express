@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 
 const productRoutes = require("./routes/products");
 const articleRoutes = require("./routes/articles");
+const playground = require("./routes/playground");
 
 const PORT = 8080;
 
@@ -22,6 +23,8 @@ app.set("view engine", ".hbs");
 app.use("/", articleRoutes); //uses articles.js router
 
 app.use("/", productRoutes); //uses products.js router
+
+app.use("/", playground);
 
 app.listen(PORT, () => {
   console.log(`Server started on PORT:${PORT}`);
