@@ -1,0 +1,28 @@
+<h1>Articles</h1>
+<form>
+    <button type="submit" formaction="/articles/new" formmethod="GET">Create</button>
+</form>
+
+<ul id="articleList">
+    {{#each articles}}
+    <li class="articleLi">
+        <h2><a href="/articles/{{URLTitle}}">{{title}}</a></h2>
+        <h3>by {{author}}</h3>
+        <p class="previewText">{{body}}</p>
+
+        <span>
+            <form action="/articles/{{URLTitle}}/edit" method="GET">
+                <button type="submit">Edit</button>
+            </form>
+            <form action="/articles/{{URLTitle}}?_method=DELETE" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+        </span>
+        </a>
+    </li>
+    {{/each}}
+</ul>
+
+{{#if success}}
+{{>success}}
+{{/if}}
