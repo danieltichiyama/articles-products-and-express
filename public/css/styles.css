@@ -1,104 +1,8 @@
-#contents {
-  background: #575757;
-  height: 90vh;
-  width: 80%;
+body {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 10px 0 0 0;
-  box-shadow: 1px 1px 10px 5px gray;
-  border-radius: 5px; }
-  #contents #productList {
-    padding-inline-start: 0;
-    margin: 0;
-    width: 97%; }
-
-.productLi {
-  list-style: none;
-  height: 75px;
-  width: 100%;
-  background: white;
-  padding: 1px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  color: black; }
-  .productLi a {
-    color: inherit;
-    text-decoration: none;
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    width: 99%;
-    align-items: center;
-    padding-left: 5px; }
-    .productLi a .placeholder {
-      height: 90%;
-      width: 150px;
-      background: purple; }
-    .productLi a ul {
-      list-style: none;
-      margin: 0;
-      padding: 0 0 0 10px;
-      width: 100%; }
-    .productLi a div {
-      margin-right: auto;
-      height: 100%;
-      width: 40%;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      align-content: center; }
-      .productLi a div #id {
-        display: flex;
-        flex-direction: row;
-        height: 100%;
-        width: auto;
-        align-items: center;
-        margin-right: 10px; }
-      .productLi a div form {
-        height: 100%;
-        width: 35%;
-        align-items: center;
-        display: inherit;
-        justify-content: center; }
-        .productLi a div form button {
-          height: 65%;
-          width: 50px;
-          margin: 1px;
-          padding: 0;
-          align-content: center; }
-
-.editForm {
-  display: flex;
-  flex-direction: column;
-  width: 25%; }
-  .editForm label {
-    margin: 5px; }
-  .editForm input {
-    margin: 5px;
-    height: 30px;
-    font-size: 12px;
-    padding-left: 5px; }
-  .editForm span {
-    display: flex;
-    flex-direction: row;
-    justify-content: center; }
-
-button {
-  margin: 10px 5px 10px 5px;
-  height: 45px;
-  width: 115px;
-  background-color: green;
-  border: 3px solid darkgreen;
-  border-radius: 2px;
-  color: white;
-  font-size: 12px; }
-  button:active {
-    background-color: darkgreen;
-    border: 3px solid darkgreen; }
-  button:focus {
-    outline: 0; }
+  flex-direction: row; }
+  body #mainContainer {
+    flex-grow: 100; }
 
 #menuContainer {
   height: 100vh;
@@ -108,8 +12,7 @@ button {
   font-family: Arial, Helvetica, sans-serif; }
   #menuContainer #menuLogoImg {
     height: 200px;
-    width: 100%;
-    border-bottom: #21496c 1px solid; }
+    width: 100%; }
   #menuContainer #menuList {
     list-style: none;
     font-size: 20px;
@@ -122,3 +25,32 @@ button {
       line-height: 50px; }
       #menuContainer #menuList .menuItem span {
         padding: 25px; }
+
+#headerContainer {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  justify-content: center;
+  align-content: center; }
+  #headerContainer h1 {
+    position: absolute;
+    z-index: 1;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 90px;
+    color: white;
+    bottom: -58px;
+    left: 150px; }
+    #headerContainer h1 #odometer {
+      display: inline-block;
+      height: 70px;
+      position: absolute;
+      left: -225px;
+      bottom: 38px; }
+  #headerContainer #svgContainer {
+    flex-grow: 100;
+    height: 100%;
+    position: absolute;
+    width: 100%; }
+    #headerContainer #svgContainer svg {
+      height: 100%;
+      width: 1400px; }
