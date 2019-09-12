@@ -6,15 +6,15 @@
 <ul id="articleList">
     {{#each articles}}
     <li class="articleLi">
-        <h2><a href="/articles/{{URLTitle}}">{{title}}</a></h2>
+        <h2><a href="/articles/{{urlTitle}}">{{title}}</a></h2>
         <h3>by {{author}}</h3>
         <p class="previewText">{{body}}</p>
 
         <span>
-            <form action="/articles/{{URLTitle}}/edit" method="GET">
+            <form action="/articles/{{urlTitle}}/edit" method="GET">
                 <button type="submit">Edit</button>
             </form>
-            <form action="/articles/{{URLTitle}}?_method=DELETE" method="POST">
+            <form action="/articles/{{urlTitle}}?_method=DELETE" method="POST">
                 <button type="submit">Delete</button>
             </form>
         </span>

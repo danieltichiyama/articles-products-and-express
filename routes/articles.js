@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const articlesDB = require("../db/articles.js");
+const articlesDB = null;
 
 let date = new Date();
 let globalError = null;
@@ -11,7 +11,7 @@ let success = false;
 let deletedArticle;
 let badArticle = null;
 
-router.get("/articles/new", (req, res) => {
+router.get("/new", (req, res) => {
   let localError = globalError;
   globalError = null;
 
@@ -22,57 +22,110 @@ router.get("/articles/new", (req, res) => {
   });
 });
 
-router.get("/articles", (req, res) => {
+router.get("/", (req, res) => {
   let localSuccess = success;
   success = false;
 
-  res.render("articles/index", {
-    articles: articlesDB.getArticles(),
-    success: localSuccess,
-    deletedArticle: deletedArticle,
-    date: date.toUTCString()
+  return req.db.Article.fetchAll().then(results => {
+    res.render("articles/index", {
+      articles: results.toJSON(),
+      success: localSuccess,
+      deletedArticle: deletedArticle,
+      date: date.toUTCString()
+    });
   });
 });
 
-router.get("/articles/:title", (req, res) => {
-  res.render("articles/article", {
-    article: articlesDB.getArticle(req.params.title)
-  });
+router.get("/:title", (req, res) => {
+  return req.db.Article.where({ urlTitle: req.params.title })
+    .fetch()
+    .then(results => {
+      res.render("articles/article", {
+        article: results.toJSON()
+      });
+    });
 });
 
-router.get("/articles/:title/edit", (req, res) => {
+router.get("/:title/edit", (req, res) => {
   let localError = globalError;
   globalError = null;
 
-  res.render("articles/edit", {
-    article: articlesDB.getArticle(req.params.title),
-    error: localError,
-    errorEdit: errorPUT,
-    errorDelete: errorDELETE
-  });
+  return req.db.Article.where({ urlTitle: req.params.title })
+    .fetch()
+    .then(results => {
+      res.render("articles/edit", {
+        article: results.toJSON(),
+        error: localError,
+        errorEdit: errorPUT,
+        errorDelete: errorDELETE
+      });
+    });
 });
 
-router.post("/articles", (req, res) => {
-  let isSuccessful = articlesDB.addArticle(req.body);
-  if (!isSuccessful) {
-    globalError = throwError(400, "Article cannot be added to database.".req);
-    errorPOST = true;
-    res.redirect("/articles/new");
-  } else {
-    res.redirect("/articles");
-  }
+router.post("/", (req, res) => {
+  let urlTitle = req.body.title.replace(/ /g, "-");
+  return req.db.Article.forge({
+    title: req.body.title,
+    body: req.body.body,
+    author: req.body.author,
+    urlTitle: urlTitle
+  })
+    .save(null, { method: "insert" })
+    .then(results => {
+      res.redirect("/articles");
+    })
+    .catch(err => {
+      globalError = throwError(
+        400,
+        "Article cannot be added to database.",
+        req
+      );
+      errorPOST = true;
+      res.redirect("/articles/new");
+    });
 });
 
-router.put("/articles/:title", (req, res) => {
-  let isSuccessful = articlesDB.editArticle(req.params.title, req.body);
-  if (!isSuccessful) {
-    globalError = throwError(400, "Article not found.", req);
-    errorPUT = true;
-    res.redirect(`/articles/${req.params.title}/edit`);
-  } else {
-    res.redirect(`/articles/${req.params.title}`);
-  }
+// router.post("/articles", (req, res) => {
+//   let isSuccessful = articlesDB.addArticle(req.body);
+//   if (!isSuccessful) {
+//     globalError = throwError(400, "Article cannot be added to database.".req);
+//     errorPOST = true;
+//     res.redirect("/articles/new");
+//   } else {
+//     res.redirect("/articles");
+//   }
+// });
+
+router.put("/:title", (req, res) => {
+  let urlTitle = req.body.title.replace(/ /g, "-");
+  req.db.Article.where({ urlTitle: req.params.title })
+    .set({
+      title: req.params.title,
+      body: req.body.body,
+      author: req.body.author,
+      urlTitle: urlTitle
+    })
+    .save()
+    .then(results => {
+      res.redirect(`/articles/${urlTitle}`);
+    })
+    .catch(err => {
+      globalError = throwError(400, "Article not found.", req);
+      errorPUT = true;
+      res.redirect(`articles/${req.params.title}/edit`);
+    });
 });
+
+// router.put("/articles/:title", (req, res) => {
+//   let isSuccessful = articlesDB.editArticle(req.params.title, req.body);
+//   if (!isSuccessful) {
+//     globalError = throwError(400, "Article not found.", req);
+//     errorPUT = true;
+//     res.redirect(`/articles/${req.params.title}/edit`);
+//   } else {
+//     res.redirect(`/articles/${req.params.title}`);
+//   }
+// });
 
 router.delete("/articles/:title", (req, res) => {
   let isSuccessful = articlesDB.deleteArticle(req.params.title);

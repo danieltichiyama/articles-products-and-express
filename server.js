@@ -2,6 +2,7 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const dbdecorator = require("./db/decorator");
 const exphbs = require("express-handlebars");
 const app = express();
 const methodOverride = require("method-override");
@@ -17,12 +18,14 @@ app.use(express.static("./public"));
 app.use(methodOverride("_method"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(dbdecorator);
+
 app.engine(".hbs", exphbs({ extname: ".hbs" }));
 app.set("view engine", ".hbs");
 
-app.use("/", articleRoutes); //uses articles.js router
+app.use("/articles", articleRoutes); //uses articles.js router
 
-app.use("/", productRoutes); //uses products.js router
+app.use("/products", productRoutes); //uses products.js router
 
 app.use("/", playground);
 

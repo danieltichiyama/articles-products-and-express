@@ -5,11 +5,13 @@
 
     <label for="name">Name:</label><input type="text" name="name" id="name" placeholder="product name">
 
+    <label for="description">Description:</label> <input type="text" name="description" id="description"
+        placeholder="product description">
+
     <label for="price">Price: </label><input type="text" name="price" id="price" placeholder="product price">
 
     <label for="inventory">Inventory:</label> <input type="text" name="inventory" id="inventory"
         placeholder="product inventory">
-    <label for="id">ID:</label> <input type="text" name="id" id="id" value="{{id}}" readonly>
     <span>
         <button type="submit">Submit</button>
         <button type="submit" formaction="/products" formmethod="GET">Cancel</button>
