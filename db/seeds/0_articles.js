@@ -7,7 +7,7 @@ exports.seed = function(knex, Promise) {
       return knex("articles").insert([
         {
           urlTitle: "What-is-Lorem-Ipsum",
-          title: "What is Lorem Ipsum?",
+          title: "What is Lorem Ipsum",
           body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dictumst quisque sagittis purus sit amet volutpat. Blandit libero volutpat sed cras ornare arcu dui vivamus. Purus ut faucibus pulvinar elementum integer enim neque volutpat ac. Tellus molestie nunc non blandit massa enim nec dui nunc. Nibh venenatis cras sed felis eget velit aliquet sagittis. Nibh praesent tristique magna sit amet purus. In tellus integer feugiat scelerisque varius morbi. Quis varius quam quisque id diam vel quam. Varius sit amet mattis vulputate enim nulla. Sit amet facilisis magna etiam tempor orci eu lobortis elementum. Mattis rhoncus urna neque viverra justo nec. Aliquet risus feugiat in ante metus dictum at tempor. Enim facilisis gravida neque convallis a cras semper auctor.
 
         Eu volutpat odio facilisis mauris sit amet massa vitae tortor. Dui accumsan sit amet nulla facilisi morbi tempus iaculis urna. Varius sit amet mattis vulputate. Arcu felis bibendum ut tristique et egestas quis. Eget dolor morbi non arcu risus quis varius quam quisque. Tempus imperdiet nulla malesuada pellentesque elit eget. Consequat id porta nibh venenatis cras. Eu augue ut lectus arcu bibendum. Sodales neque sodales ut etiam sit amet. Ornare quam viverra orci sagittis eu. Massa enim nec dui nunc.

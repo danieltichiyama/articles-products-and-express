@@ -98,9 +98,32 @@ router.post("/", (req, res) => {
 
 router.put("/:title", (req, res) => {
   let urlTitle = req.body.title.replace(/ /g, "-");
-  req.db.Article.where({ urlTitle: req.params.title })
+
+  if (urlTitle !== req.params.title) {
+    return req.db.Article.forge({
+      title: req.body.title,
+      body: req.body.body,
+      author: req.body.author,
+      urlTitle: urlTitle
+    })
+      .save(null, { method: "insert" })
+      .then(results => {
+        return req.db.Article.where({ urlTitle: req.params.title }).destroy();
+      })
+      .then(results => {
+        res.redirect(`/articles/${urlTitle}`);
+      })
+      .catch(err => {
+        globalError = throwError(400, "Article not found.", req);
+        errorPUT = true;
+        console.log("what up sucka");
+        res.redirect(`${req.params.title}/edit`);
+      });
+  }
+
+  return req.db.Article.where({ urlTitle: req.params.title })
     .set({
-      title: req.params.title,
+      title: req.body.title,
       body: req.body.body,
       author: req.body.author,
       urlTitle: urlTitle
@@ -112,9 +135,10 @@ router.put("/:title", (req, res) => {
     .catch(err => {
       globalError = throwError(400, "Article not found.", req);
       errorPUT = true;
+      console.log("proof");
       res.redirect(`articles/${req.params.title}/edit`);
     });
-});
+}); //errors
 
 // router.put("/articles/:title", (req, res) => {
 //   let isSuccessful = articlesDB.editArticle(req.params.title, req.body);
@@ -127,22 +151,21 @@ router.put("/:title", (req, res) => {
 //   }
 // });
 
-router.delete("/articles/:title", (req, res) => {
-  let isSuccessful = articlesDB.deleteArticle(req.params.title);
-  if (!isSuccessful) {
-    globalError = throwError(
-      500,
-      `Cannot delete article called ${req.params.id}`,
-      req
-    );
-    errorDELETE = true;
-    res.redirect(`articles/${req.params.title}`);
-  } else {
-    success = true;
-    deletedArticle = isSuccessful;
-
-    res.redirect("/articles");
-  }
+router.delete("/:title", (req, res) => {
+  return req.db.Article.where({ urlTitle: req.params.title })
+    .destroy()
+    .then(results => {
+      res.redirect("/articles");
+    })
+    .catch(err => {
+      globalError = throwError(
+        500,
+        `Cannot delete article called ${req.params.title}`,
+        req
+      );
+      errorDELETE = true;
+      res.redirect(`articles/${req.params.title}`);
+    });
 });
 
 let throwError = function(code, message, req) {
