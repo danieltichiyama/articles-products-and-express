@@ -4,13 +4,13 @@
 <form class="editForm" method="POST" action="/products/{{product.id}}?_method=PUT">
     <label for="name">Name:</label>
     <input type="text" name="name" id="name" value="{{product.name}}">
+    <label for="description">Description:</label>
+    <input type="text" name="description" id="description" value="{{product.description}}">
     <label for="price">Price: </label>
     <input type="text" name="price" id="price" placeholder="{{product.price}}" value="{{product.price}}">
     <label for="inventory">Inventory:</label>
     <input type="text" name="inventory" id="inventory" placeholder="{{product.inventory}}"
         value="{{product.inventory}}">
-    <label for="id">ID:</label>
-    <input type="text" name="id" id="id" value="{{product.id}}" readonly>
     <span>
         <button type="submit">Submit</button>
         <button type="submit" formaction="/products/{{product.id}}?_method=DELETE">Delete</button>

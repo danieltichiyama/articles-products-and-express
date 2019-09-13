@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const products = require("../db/products.js");
 
 let date = new Date();
 
@@ -11,85 +10,104 @@ let errorDELETE = false;
 let success = false;
 let deletedItem;
 
-router.get("/products/new", (req, res) => {
+router.get("/new", (req, res) => {
   let localError = error;
   error = null;
   res.render("products/new", {
-    id: products.getCount(),
     error: localError,
     errorNew: errorPOST
   });
-  //should have a list of current items that will narrow down if the user types in something that is similar to a product that already exists
 });
 
-router.get("/products", (req, res) => {
+router.get("/", (req, res) => {
   let localSuccess = success;
   success = false;
-
-  res.render("products/index", {
-    products: products.getProducts(),
-    success: localSuccess,
-    deletedItem: deletedItem,
-    date: date.toUTCString()
+  return req.db.Product.fetchAll().then(results => {
+    res.render("products/index", {
+      products: results.toJSON(),
+      success: localSuccess,
+      deletedItem: deletedItem,
+      date: date.toUTCString()
+    });
   });
 });
 
-router.get("/products/:id", (req, res) => {
-  res.render("products/product", {
-    product: products.getProduct(req.params.id)
-  });
-}); //can it be made to be searched by product name and not id#?
+router.get("/:id", (req, res) => {
+  return req.db.Product.where({ id: req.params.id })
+    .fetch()
+    .then(results => {
+      res.render("products/product", { product: results.attributes });
+    });
+});
 
-router.get("/products/:id/edit", (req, res) => {
+router.get("/:id/edit", (req, res) => {
   let localError = error;
   error = null;
 
-  res.render("products/edit", {
-    product: products.getProduct(req.params.id),
-    error: localError,
-    errorEdit: errorPUT,
-    errorDelete: errorDELETE
-  });
+  return req.db.Product.where({ id: req.params.id })
+    .fetch()
+    .then(results => {
+      res.render("products/edit", {
+        product: results.toJSON(),
+        error: localError,
+        errorEdit: errorPUT,
+        errorDelete: errorDELETE
+      });
+    });
 });
 
-router.post("/products", (req, res) => {
-  let isSuccessful = products.addProduct(req.body);
-  if (!isSuccessful) {
-    error = throwError(400, "Product cannot be added to database.", req);
-    errorPOST = true;
-    res.redirect("/products/new");
-  } else {
-    res.redirect("/products");
-  }
+router.post("/", (req, res) => {
+  return req.db.Product.forge({
+    name: req.body.name,
+    description: req.body.description,
+    inventory: req.body.inventory,
+    price: req.body.price
+  })
+    .save()
+    .then(results => {
+      res.redirect("/products");
+    })
+    .catch(err => {
+      error = throwError(400, "Product cannot be added to database.", req);
+      errorPOST = true;
+      res.redirect("products/new");
+    });
 });
 
-router.put(`/products/:id`, (req, res) => {
-  let isSuccessful = products.changeItem(req.params.id, req.body);
-  if (!isSuccessful) {
-    error = throwError(400, "Product ID not found in database.", req);
-    errorPUT = true;
-    res.redirect("back");
-  } else {
-    res.redirect(`/products/${req.params.id}`);
-  }
+router.put("/:id", (req, res) => {
+  return req.db.Product.where({ id: req.params.id })
+    .set({
+      name: req.body.name,
+      description: req.body.description,
+      inventory: req.body.inventory,
+      price: req.body.price
+    })
+    .save()
+    .then(results => {
+      res.redirect(`/products/${req.params.id}`);
+    })
+    .catch(err => {
+      error = throwError(400, "Product ID not found in database", req);
+      errorPUT = true;
+      res.redirect("back");
+    });
 });
 
-router.delete(`/products/:id`, (req, res) => {
-  let isSuccessful = products.deleteProduct(parseInt(req.params.id));
-  if (!isSuccessful) {
-    error = throwError(
-      500,
-      `Cannot delete product at ID ${req.params.id}.`,
-      req
-    );
-    errorDELETE = true;
-    res.redirect(`/products/${req.params.id}`);
-  } else {
-    success = true;
-    deletedItem = isSuccessful;
-
-    res.redirect("/products");
-  }
+router.delete("/products/:id", (req, res) => {
+  return req.db.Product.where({ id: req.params.id })
+    .destroy()
+    .then(results => {
+      res.redirect("/products");
+    })
+    .catch(err => {
+      error = throwError(
+        500,
+        `Cannot delete product at ID ${req.params.id}`,
+        req
+      );
+      errorDELETE = true;
+      res.redirect(`products/${req.params.id}`);
+    });
 });
 
 let throwError = function(code, message, req) {

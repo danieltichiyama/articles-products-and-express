@@ -99,3 +99,6 @@ button {
     border: 3px solid darkgreen; }
   button:focus {
     outline: 0; }
+
+.articleBody {
+  white-space: pre-wrap; }

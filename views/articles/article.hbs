@@ -1,12 +1,12 @@
 <h1>{{article.title}}</h1>
 <h2>by {{article.author}}</h2>
-<p>{{article.body}}</p>
+<div class="articleBody">{{article.body}}</div>
 
 <span>
-    <form action="/articles/{{article.URLTitle}}/edit">
+    <form action="/articles/{{article.urlTitle}}/edit">
         <button type="submit">Edit</button>
     </form>
-    <form action="/products/{{article.URLTitle}}?_method=DELETE">
+    <form action="/products/{{article.urlTitle}}?_method=DELETE">
         <button type="submit">Delete</button>
     </form>
     <form action="/articles">
