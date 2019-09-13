@@ -85,17 +85,6 @@ router.post("/", (req, res) => {
     });
 });
 
-// router.post("/articles", (req, res) => {
-//   let isSuccessful = articlesDB.addArticle(req.body);
-//   if (!isSuccessful) {
-//     globalError = throwError(400, "Article cannot be added to database.".req);
-//     errorPOST = true;
-//     res.redirect("/articles/new");
-//   } else {
-//     res.redirect("/articles");
-//   }
-// });
-
 router.put("/:title", (req, res) => {
   let urlTitle = req.body.title.replace(/ /g, "-");
 
@@ -116,7 +105,6 @@ router.put("/:title", (req, res) => {
       .catch(err => {
         globalError = throwError(400, "Article not found.", req);
         errorPUT = true;
-        console.log("what up sucka");
         res.redirect(`${req.params.title}/edit`);
       });
   }
@@ -135,21 +123,9 @@ router.put("/:title", (req, res) => {
     .catch(err => {
       globalError = throwError(400, "Article not found.", req);
       errorPUT = true;
-      console.log("proof");
       res.redirect(`articles/${req.params.title}/edit`);
     });
-}); //errors
-
-// router.put("/articles/:title", (req, res) => {
-//   let isSuccessful = articlesDB.editArticle(req.params.title, req.body);
-//   if (!isSuccessful) {
-//     globalError = throwError(400, "Article not found.", req);
-//     errorPUT = true;
-//     res.redirect(`/articles/${req.params.title}/edit`);
-//   } else {
-//     res.redirect(`/articles/${req.params.title}`);
-//   }
-// });
+});
 
 router.delete("/:title", (req, res) => {
   return req.db.Article.where({ urlTitle: req.params.title })
